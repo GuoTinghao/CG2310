@@ -1,0 +1,11 @@
+*__pycache__*
+/__pycache__/*
+*.pyc
+.idea*
+bash.sh
+*.ipynb
+*wandb*
+/wandb/*
+*.DS_Store*
+*outputs*
+/outputs/*
