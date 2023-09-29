@@ -1,5 +1,6 @@
 import wandb
 import numpy as np
+import copy
 import utils
 import torch
 import os
@@ -81,7 +82,6 @@ def validation(args, loader, data_info, data_bonds, data_charges, epoch, eval_mo
 def test(batch_size, loader, data_info, data_bonds, data_charges, eval_model, device, dtype):
     eval_model.eval()
     forces, energies = [], []
-    coords = []
     with torch.no_grad():
         for i, data in enumerate(loader):
             x = data.to(device, dtype)
@@ -99,10 +99,7 @@ def test(batch_size, loader, data_info, data_bonds, data_charges, eval_model, de
             pred_energies = pred_energies.squeeze().to('cpu', torch.float64).numpy()
             forces.append(pred_forces)
             energies.append(pred_energies)
-            x = x.view(bs, n_nodes, -1).to('cpu', torch.float64).numpy()
-            coords.append(x)
             
     forces = np.concatenate(forces, axis=0)
     energies = np.concatenate(energies, axis=0)
-    coords = np.concatenate(coords, axis=0)
-    return forces, energies, coords
+    return forces, energies

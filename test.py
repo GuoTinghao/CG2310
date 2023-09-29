@@ -50,10 +50,9 @@ def main():
     model_state_dict = torch.load('outputs/%s/model.npy' % args.exp_name)
     model.load_state_dict(model_state_dict)
 
-    test_forces, test_energies, coords = train_test.test(100, test_dataloader, data_info, data_bonds, 
+    test_forces, test_energies = train_test.test(100, test_dataloader, data_info, data_bonds, 
                                                  data_charges, model, device, dtype)
     np.savez('./datasets/test/' + args.dataset + '_label.npz', 
-             coords = coords,
              energies=test_energies, 
              forces=test_forces)
     print(args.dataset + "finish!")
