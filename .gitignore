@@ -3,7 +3,6 @@
 *.pyc
 .idea*
 bash.sh
-*.ipynb
 *wandb*
 /wandb/*
 *.DS_Store*
